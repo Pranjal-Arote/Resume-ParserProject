@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+      
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding-top: 40px;
+        }
+
+        
+        .container {
+            max-width: 650px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+       
+        .container:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+      
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+       
+        .results-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+       
+        .result-box {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            flex: 1 1 calc(33.333% - 15px);
+            min-width: 200px;
+            border-left: 5px solid #1a9807;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        
+        .result-box:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        
+        h4 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+
+       
+        .check-button, .exit-button {
+            background-color: #2544a0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin: 10px; 
+        }
+
+        
+        .check-button:hover, .exit-button:hover {
+            background-color: #28a71d;
+        }
+
+        
+        .percentage-box {
+            background-color: #95cfb5;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: none; 
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+       
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Result</h1>
+
+        
+        <div class="results-row">
+            <div class="result-box">
+                <h4>Name:</h4>
+                <p>{{ resume_name }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Email:</h4>
+                <p>{{ resume_email }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Phone:</h4>
+                <p>{{ resume_phone }}</p>
+            </div>
+        </div>
+
+        
+        <div class="results-row">
+            <div class="result-box">
+                <h4>Skills you have (from Resume):</h4>
+                <p>{{ resume_skills }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Required Skills (from JD):</h4>
+                <p>{{ jd_skills }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Matching Skills:</h4>
+                <p>{{ matching_skills }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Missing Skills in your Resume:</h4>
+                <p>{{ missing_skills }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Resume Experience:</h4>
+                <p>{{ resume_experience }}</p>
+            </div>
+            <div class="result-box">
+                <h4>JD Experience:</h4>
+                <p>{{ jd_experience }}</p>
+            </div>
+        </div>
+
+        
+        <button class="check-button" id="checkButton" onclick="showPercentage()">Check Parsing Percent</button>
+        <button class="exit-button" onclick="exitPage()">Exit</button>
+
+        
+        <div class="percentage-box" id="percentageBox">
+            <p>Parsing Percent: {{ similarity_score }}%</p>
+        </div>
+    </div>
+
+    <script>
+        function showPercentage() {
+           
+            document.getElementById('percentageBox').style.display = 'block';
+          
+            document.getElementById('checkButton').disabled = true;
+        }
+
+        function exitPage() {
+            
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
